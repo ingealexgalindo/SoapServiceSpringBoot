@@ -1,4 +1,4 @@
-package com.example.producingwebservice.repository;
+package com.example.producingwebservice.component;
 
 import com.example.producingwebservice.models.CountryConverter;
 import com.example.producingwebservice.models.CountryDTO;
@@ -13,11 +13,11 @@ import org.springframework.util.Assert;
 
 
 @Component
-public class CountryRepository {
+public class CountryComponent {
     private CountryService service;
 
     @Autowired
-    public CountryRepository(CountryService service) {
+    public CountryComponent(CountryService service) {
         this.service = service;
     }
 
@@ -32,4 +32,15 @@ public class CountryRepository {
         }
         return countries;
     }
+
+
+    public Country saveCountry( Country country) {
+        Country countries= new Country();
+        //convert to dto
+        CountryDTO countryDTO = CountryConverter.convertToCountryDTO(country);
+        //send to save
+        CountryDTO response = service.createCountry(countryDTO);
+        return countries;
+    }
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -33,5 +34,18 @@ public class CountryService {
 
     public List<CountryDTO> getAllCountries() {
         return countryRepository.findAll();
+    }
+
+    public CountryDTO createCountry(CountryDTO country) {
+        return countryRepository.save(country);
+    }
+
+    public boolean deleteCountry(String name) {
+        CountryDTO country = countryRepository.findFirstByCapital(name);
+        if (Objects.nonNull(country)) {
+            countryRepository.deleteById(country.getId());
+            return true;
+        }
+        return false;
     }
 }

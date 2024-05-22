@@ -14,4 +14,17 @@ public class CountryConverter {
         country.setPopulation(countryDTO.getPopulation());
         return country;
     }
+
+    public static CountryDTO convertToCountryDTO(Country country) {
+        if (country == null) {
+            return null;
+        }
+        CountryDTO countryDTO = new CountryDTO();
+        countryDTO.setName(country.getName());
+        countryDTO.setCapital(country.getCapital());
+        countryDTO.setCurrency(country.getCurrency());
+        countryDTO.setPopulation(country.getPopulation());
+        return countryDTO;
+    }
+
 }
